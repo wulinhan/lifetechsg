@@ -38,6 +38,58 @@
   </div>
 </header>
 
+<!-- ============ LEAD MAGNET BANNER ============ -->
+<section class="lead-banner" id="guide">
+  <div class="container lead-wrap">
+    <div class="lead-copy">
+      <p class="lead-kicker">Free download</p>
+      <h2>The No-Reno Smart Home Guide</h2>
+      <p>Exactly what to buy for your home size, what to tell your electrician, and the mistakes that cost homeowners money. Written for Singapore HDB and condo homes.</p>
+      <ul class="lead-points">
+        <li>Room-by-room switch checklist</li>
+        <li>The neutral wire question, settled</li>
+        <li>What to decide before your reno ends</li>
+      </ul>
+    </div>
+    <form class="lead-form" id="leadForm" novalidate>
+      <div class="lead-fields">
+        <div class="lead-field">
+          <label for="leadName">Name</label>
+          <input type="text" id="leadName" name="name" autocomplete="name" placeholder="Your name">
+          <span class="lead-error" id="err-name" hidden>Please enter your name.</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadEmail">Email</label>
+          <input type="email" id="leadEmail" name="email" autocomplete="email" placeholder="you@email.com">
+          <span class="lead-error" id="err-email" hidden>Please enter a valid email address.</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadPhone">WhatsApp number</label>
+          <input type="tel" id="leadPhone" name="phone" autocomplete="tel" inputmode="numeric" placeholder="e.g. 9123 4567">
+          <span class="lead-error" id="err-phone" hidden>Enter a valid Singapore mobile number (8 digits, starting with 8 or 9).</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadHome">Type of housing</label>
+          <select id="leadHome" name="housing">
+            <option value="" selected disabled>Select your home</option>
+            <option value="3-Room">3-Room</option>
+            <option value="4-Room">4-Room</option>
+            <option value="5-Room">5-Room</option>
+            <option value="More">Bigger than 5-room</option>
+          </select>
+          <span class="lead-error" id="err-home" hidden>Please select your type of housing.</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary lead-submit" id="leadSubmit">Download the free guide</button>
+      <p class="lead-privacy">We'll send the guide and the occasional tip or deal. No spam, unsubscribe anytime.</p>
+    </form>
+    <div class="lead-success" id="leadSuccess" hidden>
+      <h3>Your guide is downloading</h3>
+      <p>Thanks! If the download didn't start, <a href="assets/no-reno-smart-home-guide.pdf" download>tap here to get it</a>. We'll also be in touch on WhatsApp with tips for your home size.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="container hero-grid">
