@@ -30,11 +30,12 @@ to each lead via [Resend](https://resend.com).
 2. In **Project Settings → Environment Variables**, add:
    - `RESEND_API_KEY` (required) — your Resend API key. Never commit this to
      the repo; it lives only in Vercel.
-   - `RESEND_FROM` (optional) — a verified sender, e.g.
-     `Life Tech SG <guide@lifetechsg.com>`. Until your domain is verified in
-     Resend, the function falls back to Resend's onboarding sender, which only
-     delivers to your own Resend account email — verify the domain before
-     going live.
+   - `RESEND_FROM` (optional) — a sender on the domain verified in Resend.
+     The verified domain is `life-tech-sg.com` (with hyphens), so use e.g.
+     `Life Tech SG <guide@life-tech-sg.com>`. A sender on any other domain
+     (like `lifetechsg.com`) will be rejected with a 403. Without this
+     variable the function falls back to Resend's onboarding sender, which
+     only delivers to your own Resend account email.
    - `LEAD_NOTIFY_TO` (optional) — an address (e.g. `sales@lifetechsg.com`)
      that receives an internal notification for every new lead.
 3. Deploy. The form posts to `/api/lead`; on static-only hosts (e.g. GitHub

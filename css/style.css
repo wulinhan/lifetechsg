@@ -174,6 +174,17 @@ a { color: var(--md-ink); }
 }
 .lead-field select:invalid, .lead-field select option[value=""] { color: var(--md-ink-faint); }
 .lead-field input:focus, .lead-field select:focus { box-shadow: 0 0 0 3px rgba(255, 201, 58, 0.45); }
+/* Keep browser autofill from tinting fields green on the dark banner */
+.lead-field input:-webkit-autofill,
+.lead-field input:-webkit-autofill:hover,
+.lead-field input:-webkit-autofill:focus,
+.lead-field select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: var(--md-ink);
+  caret-color: var(--md-ink);
+  transition: background-color 600000s 0s;
+}
 .lead-field input.is-invalid, .lead-field select.is-invalid { border-color: #ff6b5e; }
 .lead-error { color: #ffb0a8; font-size: 0.78rem; margin-top: 5px; }
 .lead-submit { width: 100%; background: #fff; color: var(--md-ink); font-weight: 700; }
@@ -201,6 +212,11 @@ img.pkg-img {
 }
 .img-contain { object-fit: contain; padding: 14px; }
 .img-cover { object-fit: cover; }
+.guide-photo {
+  display: block; width: 100%; object-fit: contain;
+  background: #fff; border: 1px solid var(--md-outline);
+  border-radius: var(--radius-card); padding: 16px;
+}
 .contact-img {
   display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
   border-radius: 12px; margin-bottom: 16px;
@@ -218,7 +234,12 @@ img.pkg-img {
 /* ---- Reels marquee ---- */
 .reel-marquee {
   overflow: hidden; background: var(--md-surface);
-  padding: 26px 0; border-bottom: 1px solid var(--md-outline);
+  padding: 26px 0 30px; border-bottom: 1px solid var(--md-outline);
+}
+.reel-title {
+  text-align: center; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--md-ink-faint); margin-bottom: 20px;
 }
 .reel-track {
   display: flex; width: max-content;
@@ -226,7 +247,7 @@ img.pkg-img {
 }
 .reel-track:hover { animation-play-state: paused; }
 .reel-track video {
-  height: 340px; aspect-ratio: 9 / 16; object-fit: cover;
+  height: 340px; width: auto; /* natural aspect ratio, no cropping */
   border-radius: 18px; box-shadow: var(--elev-1); background: #000;
   margin-right: 16px; /* uniform per-item spacing keeps the -50% loop seamless */
 }

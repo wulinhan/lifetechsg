@@ -80,11 +80,11 @@ function emailHtml(name, h) {
     <p style="margin:8px 0 0;color:#b5b5b5;font-size:14px;">${h.label} edition &middot; attached as a PDF</p>
   </div>
   <div style="background:#ffffff;border-radius:0 0 16px 16px;padding:28px;">
-    <p style="font-size:15px;line-height:1.6;">Hi ${firstName(name)},</p>
-    <p style="font-size:15px;line-height:1.6;">Thanks for downloading the guide. The <strong>${h.label} edition</strong> is attached, with your
-    room-by-room switch map (about <strong>${h.switches} switches and ${h.hubs} hubs</strong> for a home like yours), the neutral wire
-    question settled, and what to decide before buying a single light.</p>
-    <p style="font-size:15px;line-height:1.6;">When you're ready, here's what a ${h.label.toLowerCase()} setup costs, no renovation required:</p>
+    <p style="font-size:15px;line-height:1.6;">Hello ${firstName(name)},</p>
+    <p style="font-size:15px;line-height:1.6;">Lovely to have you. Your <strong>${h.label} edition</strong> of the guide is attached — it walks
+    your home room by room (about <strong>${h.switches} switches and ${h.hubs} hubs</strong> for a place like yours), settles the neutral
+    wire question for good, and flags the one decision to make before you buy a single light.</p>
+    <p style="font-size:15px;line-height:1.6;">And when you're curious about numbers, here's what a ${h.label.toLowerCase()} setup costs — no renovation required:</p>
     <table style="width:100%;border-collapse:collapse;border:1px solid #e0e0e0;border-radius:12px;font-size:14px;">
       ${packagesBlock(h)}
     </table>
