@@ -174,16 +174,27 @@ a { color: var(--md-ink); }
 }
 .lead-field select:invalid, .lead-field select option[value=""] { color: var(--md-ink-faint); }
 .lead-field input:focus, .lead-field select:focus { box-shadow: 0 0 0 3px rgba(255, 201, 58, 0.45); }
-/* Keep browser autofill from tinting fields green on the dark banner */
+/* Keep browser autofill from tinting fields green on the dark banner.
+   Chrome paints its own background; the giant inset shadow covers it, and
+   !important beats the UA stylesheet. The focus rule must re-include the
+   inset shadow because box-shadow is not additive. */
 .lead-field input:-webkit-autofill,
 .lead-field input:-webkit-autofill:hover,
+.lead-field input:-webkit-autofill:active,
+.lead-field select:-webkit-autofill,
+.lead-field select:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #141414 !important;
+  caret-color: #141414;
+  background-color: #ffffff !important;
+  transition: background-color 9999999s ease-out 0s;
+}
 .lead-field input:-webkit-autofill:focus,
-.lead-field select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
-  box-shadow: 0 0 0 1000px #ffffff inset;
-  -webkit-text-fill-color: var(--md-ink);
-  caret-color: var(--md-ink);
-  transition: background-color 600000s 0s;
+.lead-field select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 3px rgba(255, 201, 58, 0.45), 0 0 0 1000px #ffffff inset !important;
+  box-shadow: 0 0 0 3px rgba(255, 201, 58, 0.45), 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #141414 !important;
 }
 .lead-field input.is-invalid, .lead-field select.is-invalid { border-color: #ff6b5e; }
 .lead-error { color: #ffb0a8; font-size: 0.78rem; margin-top: 5px; }
