@@ -19,12 +19,16 @@ tabs.forEach(function (tab) {
   });
 });
 
-// Lead magnet form
-// To capture leads, set LEAD_ENDPOINT to a form backend URL
-// (e.g. a Formspree endpoint like https://formspree.io/f/XXXXXXXX).
-// Leave empty to skip network submission and just serve the download.
-const LEAD_ENDPOINT = '';
-const GUIDE_PATH = 'assets/no-reno-smart-home-guide.pdf';
+// Lead magnet form: posts to the Vercel function which emails the
+// housing-specific guide via Resend. If the API is unavailable (e.g. a
+// static-only deployment), falls back to a direct download.
+const LEAD_API = '/api/lead';
+const GUIDES = {
+  '3-Room': 'assets/guides/no-reno-smart-home-guide-3-room.pdf',
+  '4-Room': 'assets/guides/no-reno-smart-home-guide-4-room.pdf',
+  '5-Room': 'assets/guides/no-reno-smart-home-guide-5-room.pdf',
+  'More': 'assets/guides/no-reno-smart-home-guide-multi-storey.pdf'
+};
 
 const leadForm = document.getElementById('leadForm');
 
@@ -60,17 +64,38 @@ if (leadForm) {
   }
 
   Object.keys(fields).forEach(function (key) {
-    fields[key].el.addEventListener('input', function () {
-      if (fields[key].el.classList.contains('is-invalid')) {
-        showFieldState(fields[key], fields[key].valid(fields[key].el.value));
-      }
-    });
-    fields[key].el.addEventListener('change', function () {
-      if (fields[key].el.classList.contains('is-invalid')) {
-        showFieldState(fields[key], fields[key].valid(fields[key].el.value));
-      }
+    ['input', 'change'].forEach(function (evt) {
+      fields[key].el.addEventListener(evt, function () {
+        if (fields[key].el.classList.contains('is-invalid')) {
+          showFieldState(fields[key], fields[key].valid(fields[key].el.value));
+        }
+      });
     });
   });
+
+  function showSuccess(emailed, email, housing) {
+    leadForm.hidden = true;
+    const box = document.getElementById('leadSuccess');
+    const title = document.getElementById('leadSuccessTitle');
+    const msg = document.getElementById('leadSuccessMsg');
+    const fallback = document.getElementById('leadFallback');
+    const guidePath = GUIDES[housing] || GUIDES['4-Room'];
+    fallback.href = guidePath;
+    if (emailed) {
+      title.textContent = 'Check your inbox';
+      msg.childNodes[0].textContent = 'Thanks! Your ' + housing + ' guide is on its way to ' + email + '. Can’t find it? Check spam, or ';
+    } else {
+      title.textContent = 'Your guide is downloading';
+      msg.childNodes[0].textContent = 'Thanks! If the download didn’t start, ';
+      const link = document.createElement('a');
+      link.href = guidePath;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+    box.hidden = false;
+  }
 
   leadForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -93,34 +118,25 @@ if (leadForm) {
     const submitBtn = document.getElementById('leadSubmit');
     submitBtn.disabled = true;
 
+    const email = fields.email.el.value.trim();
+    const housing = fields.housing.el.value;
     const payload = {
       name: fields.name.el.value.trim(),
-      email: fields.email.el.value.trim(),
+      email: email,
       whatsapp: fields.phone.el.value.replace(/[\s-]/g, ''),
-      housing: fields.housing.el.value,
+      housing: housing,
       source: 'no-reno-guide-banner'
     };
 
-    function finish() {
-      leadForm.hidden = true;
-      document.getElementById('leadSuccess').hidden = false;
-      const link = document.createElement('a');
-      link.href = GUIDE_PATH;
-      link.download = '';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    }
-
-    if (LEAD_ENDPOINT) {
-      fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(function () {}).finally(finish);
-    } else {
-      finish();
-    }
+    fetch(LEAD_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      showSuccess(res.ok, email, housing);
+    }).catch(function () {
+      showSuccess(false, email, housing);
+    });
   });
 }
 

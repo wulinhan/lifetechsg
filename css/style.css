@@ -185,6 +185,59 @@ a { color: var(--md-ink); }
 .lead-success p { color: #b5b5b5; font-size: 0.95rem; }
 .lead-success a { color: #ffc93a; font-weight: 700; }
 
+/* ---- Real images ---- */
+.hero-photo {
+  display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: var(--radius-card); box-shadow: var(--elev-2);
+}
+.tier-img {
+  display: block; width: 100%; height: 150px; object-fit: contain;
+  background: #fff; border: 1px solid var(--md-outline); border-radius: 12px;
+  padding: 12px; margin-bottom: 18px;
+}
+img.pkg-img {
+  display: block; width: 100%; min-height: 0; padding: 0;
+  border: none; border-bottom: 1px solid var(--md-outline); background: #fff;
+}
+.img-contain { object-fit: contain; padding: 14px; }
+.img-cover { object-fit: cover; }
+.contact-img {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 12px; margin-bottom: 16px;
+}
+.blog-thumb {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 12px; margin-bottom: 16px; background: var(--md-surface-variant);
+}
+.article-hero {
+  display: block; width: 100%; aspect-ratio: 16 / 7; object-fit: cover;
+  border-radius: var(--radius-card); margin: 8px 0 28px;
+  background: var(--md-surface-variant);
+}
+
+/* ---- Reels marquee ---- */
+.reel-marquee {
+  overflow: hidden; background: var(--md-surface);
+  padding: 26px 0; border-bottom: 1px solid var(--md-outline);
+}
+.reel-track {
+  display: flex; width: max-content;
+  animation: reelScroll 70s linear infinite;
+}
+.reel-track:hover { animation-play-state: paused; }
+.reel-track video {
+  height: 340px; aspect-ratio: 9 / 16; object-fit: cover;
+  border-radius: 18px; box-shadow: var(--elev-1); background: #000;
+  margin-right: 16px; /* uniform per-item spacing keeps the -50% loop seamless */
+}
+@keyframes reelScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-track { animation: none; }
+}
+
 /* ---- Hero ---- */
 .hero {
   background:
@@ -506,6 +559,7 @@ a { color: var(--md-ink); }
   .contact-grid { grid-template-columns: 1fr; }
   .pkg-grid-2, .pkg-grid-3 { grid-template-columns: 1fr; }
   .lead-fields { grid-template-columns: 1fr; }
+  .reel-track video { height: 260px; }
   .pkg-img-sq { aspect-ratio: 16 / 9; }
   .wa-fab { left: 16px; bottom: 16px; width: 54px; height: 54px; }
 }
