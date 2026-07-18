@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [claude/life-tech-sg-landing-4350rj]
+    branches: [main, claude/life-tech-sg-landing-4350rj]
   workflow_dispatch:
 
 permissions:
