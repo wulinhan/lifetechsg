@@ -52,6 +52,19 @@ target size** for that slot, and a copy-paste **prompt**.
 > homeowner in their 30s glancing at a phone showing a simple home-control app,
 > late-afternoon golden light spilling across the room.
 
+## 1b. Hero — daytime alternate (bright, airy variant of #1)
+**Slot:** hero, alternate to #1 · `assets/site/hero-living-room-day.jpg`
+**Ratio:** 4:3 landscape · target 1600×1200
+
+> A light-filled Singapore condo living room at midday, floor-to-ceiling windows
+> open to a leafy tropical view with a hint of pool and neighbouring towers, crisp
+> white walls with one warm oak feature panel, a pale bouclé sofa and a low
+> sintered-stone coffee table, motorised sheer curtains half-drawn to soften the
+> bright daylight, a slim matte-white smart rocker switch and a wall LCD smart panel
+> by the hallway, a young Singaporean couple relaxed on the sofa with a phone showing
+> a simple one-app home dashboard, fresh and airy atmosphere, bright natural
+> daylight, clean and uncluttered.
+
 ## 2. "You want a home that works the moment you walk in" — guide section
 **Slot:** currently the device-ecosystem collage; a lifestyle photo could sit beside or replace it
 **Slot path:** `assets/site/walk-in-moment.jpg`
