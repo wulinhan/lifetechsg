@@ -65,6 +65,19 @@ target size** for that slot, and a copy-paste **prompt**.
 > a simple one-app home dashboard, fresh and airy atmosphere, bright natural
 > daylight, clean and uncluttered.
 
+## 1c. Hero — iPhone style, rocker switch in foreground (product-forward variant)
+**Slot:** hero or product feature · `assets/site/hero-rocker-switch-day.jpg`
+**Ratio:** 4:3 landscape · target 1600×1200
+**Note:** no LCD panel, no people, iPhone-photography look.
+
+> Shot on iPhone, a matte-black smart rocker light switch mounted on a warm oak
+> feature wall in sharp focus in the foreground, its clean two-gang faceplate
+> catching soft daylight, the background gently blurred into a bright modern
+> Singapore HDB living room — light oak floor, a pale linen sofa, floor-to-ceiling
+> window with lush rain-tree greenery outside — midday natural light, realistic
+> iPhone computational-photography look with true-to-life colour and subtle
+> depth-of-field, casual yet crisp, no people, no wall panels or screens.
+
 ## 2. "You want a home that works the moment you walk in" — guide section
 **Slot:** currently the device-ecosystem collage; a lifestyle photo could sit beside or replace it
 **Slot path:** `assets/site/walk-in-moment.jpg`
