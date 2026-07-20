@@ -38,7 +38,7 @@ const HOUSING = {
   },
 };
 
-const WA_LINK = 'https://wa.me/6597760971?text=' +
+const WA_LINK = 'https://wa.me/6588547512?text=' +
   encodeURIComponent("Hi! I downloaded the No-Reno Smart Home Guide and I'd like to book a free demo.");
 
 function firstName(name) {
@@ -91,7 +91,7 @@ function emailHtml(name, h) {
     <p style="text-align:center;margin:28px 0 8px;">
       <a href="${WA_LINK}" style="background:#141414;color:#ffffff;text-decoration:none;font-weight:bold;padding:14px 30px;border-radius:99px;display:inline-block;">Book a free, no-obligation demo</a>
     </p>
-    <p style="text-align:center;color:#6e6e6e;font-size:13px;margin:0 0 24px;">WhatsApp us at 9776 0971, or just reply to this email.</p>
+    <p style="text-align:center;color:#6e6e6e;font-size:13px;margin:0 0 24px;">WhatsApp us at 8854 7512, or just reply to this email.</p>
     <p style="font-size:15px;line-height:1.6;">See the whole system running at our showroom before you spend a dollar. Every package comes
     with app setup, Google or Alexa voice control, and a full first-year warranty.</p>
     <p style="font-size:15px;line-height:1.6;">Mike &amp; the Life Tech SG team</p>

@@ -469,6 +469,7 @@ img.pkg-img {
 .pkg-perk { font-size: 0.8rem; color: var(--md-ink-faint); margin-bottom: 12px; }
 .pkg-perk::before { content: '\1F381  '; }
 .pkg-price { margin-top: auto; font-weight: 900; font-size: 1.5rem; color: var(--tc, var(--md-ink)); }
+.nett { font-size: 0.6em; font-weight: 500; color: #9a9a9a; letter-spacing: 0.02em; }
 
 .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
 .perk {
