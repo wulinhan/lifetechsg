@@ -141,12 +141,44 @@ if (leadForm) {
 }
 
 // Google reviews.
-// Fill this array with genuine reviews (copy them from your Google Business
-// profile). Leave it empty and the whole section hides itself, so the page
-// never shows a placeholder or an invented review. Avatars are drawn from the
-// reviewer's initials — no photo hotlinking needed.
-//   { name: 'Jane T.', when: '2 weeks ago', stars: 5, text: 'What they wrote.' }
-const REVIEWS = [];
+// Genuine reviews from the Life Tech SG Google Business profile. Each `img`
+// points at the reviewer's photo in assets/reviews/; if that file is missing
+// the card falls back to a coloured monogram, so nothing ever looks broken.
+// Leave the array empty and the whole section hides itself.
+const REVIEWS = [
+  {
+    name: 'Alvin Lim', when: '5 months ago', stars: 5, img: 'assets/reviews/alvin-lim.jpg',
+    text: 'First-time homeowner working with smart home systems and had a great experience with Mike. Installer Clarence was professional and knowledgeable. They took the time to explain everything clearly and shared in-depth tips on how I can continue expanding and using my smart home devices. Highly recommend.'
+  },
+  {
+    name: 'Erika Rugdee', when: '2 months ago', stars: 5, img: 'assets/reviews/erika-rugdee.jpg',
+    text: 'Had a really smooth experience with Life Tech SG, especially working with Mike on our smart home setup. I’m honestly not a tech person at all, but the whole process was very easy and fuss-free. Mike handled pretty much everything from start to finish, explaining things in a simple way, giving practical suggestions, and setting everything up without overwhelming us. I was quite hands-off throughout, mostly just choosing from the different switch designs to match our home. What I appreciated was how seamless everything felt. There was no complicated setup on our end, and Mike made sure everything worked properly before handing over. And honestly, who knew you could automate so much? From the aircon turning on before we get home to setting timers for things like the cooker hob to switch off. It just makes daily life a lot easier and gives extra peace of mind. Now that we’ve moved in, it’s been a game changer. Coming home is so convenient, lights, aircon, and other settings are all just a touch away, or even automatic when we walk into a room. It’s one of those upgrades you don’t realise you need until you have it. Best part is no hard sales and the best after sales service. Mike was ready any time to answer our questions and even coming down multiple times to assist us. Tech dummy approved! 10/10 recommend!'
+  },
+  {
+    name: 'Syed Umar', when: 'a year ago', stars: 5, img: 'assets/reviews/syed-umar.jpg',
+    text: 'Decided to go with Life Tech SG after meeting with a few smart companies. Mike’s education on his social media pages really helps and on the 1st meeting, he was very detailed but not confusing and really met our simple demands. Liaising with our contractor is a breeze and completion done perfectly. Clarence is also a tremendous help, right from setting up and after sales service. He really went the extra mile and came back during off days to assist. 100% recommended and definitely will engage Life Tech SG for future services and referral. Customer Service is impeccable!'
+  },
+  {
+    name: 'AT AT', when: '2 years ago', stars: 5, img: 'assets/reviews/at-at.jpg',
+    text: 'Mike is the guy to look for if you need smart home setup, the team is professional before and after installation. Always prompt in their reply. No hard selling and Johnny did a great job on the installation and integration too. Strongly recommended.'
+  },
+  {
+    name: 'jaschintaz', when: '3 years ago', stars: 5, img: 'assets/reviews/jaschintaz.jpg',
+    text: 'This is a great place to start if you are as clueless about smart home devices as me. Mike was very patient with me and explained about the various smart home options available, and compatible apps, devices and appliances. The showroom is divided into the smart living room, smart bedroom and smart kitchen, and a general area with the other smart appliances. From the demo conducted showrooms, you can get an idea about how to set up the various smart home options in your own home. To my surprise, the smart home devices are also not as pricey as I thought they would be. Smart home technology has really come a long way! Drop by today if you’d like to explore smart home options without the hassle of researching each separate provider on your own and see for yourself how these devices work live!'
+  },
+  {
+    name: 'Sazali Samuri', when: 'a year ago', stars: 5, img: 'assets/reviews/sazali-samuri.jpg',
+    text: 'Big thanks to Mike and Clarence from Life Tech / Home Auto for setting up our smart home system! They provided all the devices we needed, specifically tailored for homes with non-neutral wiring. The installation process was smooth and hassle-free, and everything works perfectly. We couldn’t be happier with their professional service and attention to detail. Highly recommend them for anyone looking to upgrade their home with smart technology.'
+  },
+  {
+    name: 'Gary Tan KC', when: '2 years ago', stars: 5, img: 'assets/reviews/gary-tan.jpg',
+    text: 'Came across Life Tech SG when searching for smart home options. They offer very attractive smart home packages that are affordable to us as new home owners. Visited Mike’s showroom and was given a very informative tour about what smart home setup is all about. Mike is very patient, professional and very knowledgeable in this domain. Johnny was assigned as the installer for my smart home. He is very dedicated in his job, very meticulous and careful as he understands that it’s our new home. He went the extra mile to provide full explanation and integration into my Google Home, which was a breeze. Kudos to his hard work and 6 hours spent setting up everything for us. We will definitely recommend Life Tech SG for new homeowners looking for smart home solutions!'
+  },
+  {
+    name: 'Jeremy Tan', when: '6 months ago', stars: 5, img: 'assets/reviews/jeremy-tan.jpg',
+    text: 'Had a great experience with the smart home installation for my place. The setup was smooth, efficient, and honestly a breeze from start to finish. Everything was explained clearly in simple terms, and Clarence took the time to walk me through how the system works without rushing. What stood out was the patience and attention to detail, making sure everything was properly configured and that I was comfortable using it before wrapping up. Professional, knowledgeable, and very easy to work with. Highly recommended if you’re looking for a fuss-free, competitively priced and reliable smart home setup!'
+  }
+];
 
 (function renderReviews() {
   const section = document.getElementById('reviews');
@@ -159,6 +191,7 @@ const REVIEWS = [];
   }
 
   // Deterministic avatar tint from the name, drawn from the brand palette.
+  // Used as the monogram fallback when a reviewer photo is missing.
   const TINTS = ['#1a9e8f', '#2f6fed', '#e0665f', '#c99a2e', '#6b4fd8', '#3f8f3f'];
   function tintFor(name) {
     let sum = 0;
@@ -181,22 +214,44 @@ const REVIEWS = [];
     '</svg>';
 
   grid.innerHTML = REVIEWS.map(function (r) {
-    const stars = '★★★★★'.slice(0, r.stars || 5) + '☆☆☆☆☆'.slice(0, 5 - (r.stars || 5));
+    const n = r.stars || 5;
+    const stars = '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    const photo = r.img
+      ? '<img class="review-photo" src="' + r.img + '" alt="" loading="lazy" onerror="this.remove()">'
+      : '';
     return (
       '<article class="review-card">' +
         '<div class="review-top">' +
-          '<span class="review-avatar" style="background:' + tintFor(r.name) + '" aria-hidden="true">' + initials(r.name) + '</span>' +
+          '<span class="review-avatar" style="background:' + tintFor(r.name) + '" aria-hidden="true">' + initials(r.name) + photo + '</span>' +
           '<div class="review-who">' +
             '<span class="review-name">' + r.name + '</span>' +
             '<span class="review-when">' + (r.when || '') + '</span>' +
           '</div>' +
         '</div>' +
-        '<span class="review-stars" aria-label="' + (r.stars || 5) + ' out of 5 stars">' + stars + '</span>' +
-        '<p class="review-text">' + r.text + '</p>' +
+        '<span class="review-stars" aria-label="' + n + ' out of 5 stars">' + stars + '</span>' +
+        '<p class="review-text is-clamped">' + r.text + '</p>' +
         '<span class="review-source">' + gLogo + 'Posted on Google</span>' +
       '</article>'
     );
   }).join('');
+
+  // Add a Read more / Show less toggle only where the text actually overflows.
+  grid.querySelectorAll('.review-text').forEach(function (p) {
+    if (p.scrollHeight - p.clientHeight <= 4) {
+      p.classList.remove('is-clamped');
+      return;
+    }
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'review-more';
+    btn.textContent = 'Read more';
+    btn.addEventListener('click', function () {
+      const open = p.classList.toggle('is-open');
+      p.classList.toggle('is-clamped', !open);
+      btn.textContent = open ? 'Show less' : 'Read more';
+    });
+    p.insertAdjacentElement('afterend', btn);
+  });
 })();
 
 // Mobile nav toggle
