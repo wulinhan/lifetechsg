@@ -99,7 +99,8 @@ function emailHtml(name, h) {
     <p style="color:#6e6e6e;font-size:12px;line-height:1.6;margin:0;">
       Life Tech SG &middot; 33 Mohamed Sultan Rd, #02-01, Singapore 238977 (by appointment)<br>
       Satellite showroom: Zenterra Lighting, Blk 259 Jurong East St 24, #01-439<br>
-      Tue-Fri 11am-6pm &middot; Sat 11am-4pm &middot; Closed Sun, Mon &amp; PH<br><br>
+      Tue-Fri 11am-6pm &middot; Sat 11am-4pm &middot; Closed Sun, Mon &amp; PH<br>
+      <strong>Appointment required — please arrange a time with us before you visit.</strong><br><br>
       You're receiving this because you requested the guide at lifetechsg.com. No spam; reply "unsubscribe" and we'll remove you.
     </p>
   </div>
