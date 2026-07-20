@@ -1,23 +1,21 @@
 # Reviewer photos
 
-Drop each reviewer's photo here using the exact filename below. The reviews
-section (`index.html` → `js/main.js` `REVIEWS`) shows the photo as a small
-rounded squircle above the review text. If a file is missing, that card falls
-back to a coloured monogram automatically — nothing looks broken.
+These are the photos each reviewer attached to their Google review. They show
+as small rounded squircle thumbnails above the review text on the landing page
+(`index.html` → `js/main.js` `REVIEWS`), and tap to enlarge in a lightbox.
 
-Square images work best (they're cropped to a square). ~200×200px is plenty.
+Images are compressed WebP (long edge ~1000px). To add or change a reviewer's
+photos, drop the files here and update that reviewer's `photos:` list in the
+`REVIEWS` array in `js/main.js`. A missing file is skipped automatically, so a
+card never shows a broken image.
 
-| Reviewer      | Filename                |
-|---------------|-------------------------|
-| Alvin Lim     | `alvin-lim.jpg`         |
-| Erika Rugdee  | `erika-rugdee.jpg`      |
-| Syed Umar     | `syed-umar.jpg`         |
-| AT AT         | `at-at.jpg`             |
-| jaschintaz    | `jaschintaz.jpg`        |
-| Sazali Samuri | `sazali-samuri.jpg`     |
-| Gary Tan KC   | `gary-tan.jpg`          |
-| Jeremy Tan    | `jeremy-tan.jpg`        |
-
-If your files use a different name or extension (e.g. `.png`), either rename
-them to match this table or update the matching `img:` path in the `REVIEWS`
-array in `js/main.js`.
+| Reviewer      | Files                                          |
+|---------------|------------------------------------------------|
+| Alvin Lim     | `alvin-1.webp`, `alvin-2.webp`                 |
+| Erika Rugdee  | `erika-1.webp`, `erika-2.webp`, `erika-3.webp` |
+| Syed Umar     | `syed-1.webp` … `syed-4.webp`                  |
+| AT AT         | `at-1.webp`, `at-2.webp`                        |
+| jaschintaz    | `jaschinta-1.webp` … `jaschinta-3.webp`        |
+| Sazali Samuri | `sazali-1.webp`, `sazali-2.webp`               |
+| Gary Tan KC   | `gary-1.webp`, `gary-2.webp`                    |
+| Jeremy Tan    | `Jeremy.webp`                                   |
