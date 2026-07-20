@@ -221,7 +221,7 @@ const REVIEWS = [
     '<path fill="#EA4335" d="M12 4.8c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.2 15.1 0 12 0 7.5 0 3.7 2.6 1.8 6.4l3.8 3C6.5 6.7 9 4.8 12 4.8z"/>' +
     '</svg>';
 
-  grid.innerHTML = REVIEWS.map(function (r) {
+  function cardHTML(r) {
     const n = r.stars || 5;
     const stars = '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
     const photos = (r.photos || []).map(function (src) {
@@ -241,28 +241,25 @@ const REVIEWS = [
         '</div>' +
         '<span class="review-stars" aria-label="' + n + ' out of 5 stars">' + stars + '</span>' +
         photoRow +
-        '<p class="review-text is-clamped">' + r.text + '</p>' +
+        '<p class="review-text">' + r.text + '</p>' +
         '<span class="review-source">' + gLogo + 'Posted on Google</span>' +
       '</article>'
     );
-  }).join('');
+  }
 
-  // Add a Read more / Show less toggle only where the text actually overflows.
-  grid.querySelectorAll('.review-text').forEach(function (p) {
-    if (p.scrollHeight - p.clientHeight <= 4) {
-      p.classList.remove('is-clamped');
-      return;
-    }
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'review-more';
-    btn.textContent = 'Read more';
-    btn.addEventListener('click', function () {
-      const open = p.classList.toggle('is-open');
-      p.classList.toggle('is-clamped', !open);
-      btn.textContent = open ? 'Show less' : 'Read more';
-    });
-    p.insertAdjacentElement('afterend', btn);
+  // Two identical groups let the track loop seamlessly at translateX(-50%).
+  const group = '<div class="reviews-group">' + REVIEWS.map(cardHTML).join('') + '</div>';
+  grid.innerHTML = '<div class="reviews-track">' + group + group + '</div>';
+  const track = grid.querySelector('.reviews-track');
+
+  // Press-and-hold to pause on touch (hover-pause is handled in CSS for mouse).
+  // A quick tap still fires click, so tapping a photo thumbnail opens the
+  // lightbox; the momentary pause during that tap is imperceptible.
+  ['touchstart', 'pointerdown'].forEach(function (evt) {
+    grid.addEventListener(evt, function () { track.classList.add('is-held'); }, { passive: true });
+  });
+  ['touchend', 'touchcancel', 'pointerup', 'pointercancel', 'pointerleave'].forEach(function (evt) {
+    grid.addEventListener(evt, function () { track.classList.remove('is-held'); }, { passive: true });
   });
 
   // Lightbox: tap a thumbnail to view the full photo.
