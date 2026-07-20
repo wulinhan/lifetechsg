@@ -471,6 +471,23 @@ img.pkg-img {
 .pkg-price { margin-top: auto; font-weight: 900; font-size: 1.5rem; color: var(--tc, var(--md-ink)); }
 .nett { font-size: 0.6em; font-weight: 500; color: #9a9a9a; letter-spacing: 0.02em; }
 
+/* LINE8 premium colour swatches */
+.line8-colours-heading { margin: 40px 0 2px; font-size: 1.15rem; font-weight: 700; }
+.line8-swatches {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+}
+.swatch { margin: 0; text-align: center; }
+.swatch img {
+  width: 100%; aspect-ratio: 5 / 4; object-fit: cover;
+  border-radius: 12px; box-shadow: var(--elev-1);
+  background: var(--md-surface-container);
+}
+.swatch figcaption {
+  margin-top: 8px; font-size: 0.82rem; font-weight: 500; color: var(--md-ink-soft);
+}
+@media (max-width: 820px) { .line8-swatches { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 460px) { .line8-swatches { grid-template-columns: repeat(2, 1fr); } }
+
 .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
 .perk {
   background: var(--md-surface); border-radius: var(--radius-card);
