@@ -549,6 +549,13 @@ img.pkg-img {
   font-size: 0.9rem;
 }
 .footer-wrap p { margin: 4px 0; }
+.footer-social { display: flex; gap: 14px; justify-content: center; margin-bottom: 14px; }
+.footer-social a {
+  display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center;
+  border-radius: 50%; background: rgba(255, 255, 255, 0.1); color: #fff; transition: background 0.15s;
+}
+.footer-social a:hover { background: rgba(255, 255, 255, 0.24); }
+.footer-social svg { width: 19px; height: 19px; fill: currentColor; }
 .site-footer strong { color: #fff; }
 .site-footer a { color: #d6d6d6; text-decoration: none; }
 
@@ -585,6 +592,8 @@ img.pkg-img {
 @media (max-width: 900px) {
   .lead-wrap { grid-template-columns: 1fr; gap: 28px; }
   .lead-success { grid-column: auto; }
+  /* Single-column cards get wide; let the 16:9 bundle photo show at full height, uncropped */
+  .tier-img { height: auto; aspect-ratio: 16 / 9; }
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .hero-img { min-height: 240px; }
   .guide-grid { grid-template-columns: 1fr; gap: 28px; }
