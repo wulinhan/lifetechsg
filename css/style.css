@@ -442,7 +442,10 @@ img.pkg-img {
 /* ---- Package cards (one image per tier/bundle) ---- */
 .pkg-grid { display: grid; gap: 20px; }
 .pkg-grid-2 { grid-template-columns: repeat(2, 1fr); }
-.pkg-grid-3 { grid-template-columns: repeat(3, 1fr); }
+/* Flex (not grid) so a partial last row — e.g. the 2 leftover Premium bundles —
+   stays centred instead of hugging the left. Three per row on desktop. */
+.pkg-grid-3 { display: flex; flex-wrap: wrap; justify-content: center; }
+.pkg-grid-3 > * { flex: 0 1 calc((100% - 40px) / 3); min-width: 0; }
 .pkg-card {
   background: var(--md-surface);
   border-radius: var(--radius-card);
@@ -693,7 +696,7 @@ img.pkg-img {
   .guide-grid { grid-template-columns: 1fr; gap: 28px; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .guide-badges, .tier-grid, .perks { grid-template-columns: 1fr; }
-  .pkg-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .pkg-grid-3 > * { flex-basis: calc((100% - 20px) / 2); } /* two per row on tablet, last one centred */
 }
 
 @media (max-width: 720px) {
@@ -717,7 +720,8 @@ img.pkg-img {
     max-width: 340px; margin: 0 auto 38px;
   }
   .size-tab { width: 100%; padding: 10px 0; text-align: center; }
-  .pkg-grid-2, .pkg-grid-3 { grid-template-columns: 1fr; }
+  .pkg-grid-2 { grid-template-columns: 1fr; }
+  .pkg-grid-3 > * { flex-basis: 100%; } /* single column on mobile */
   .lead-fields { grid-template-columns: 1fr; }
   .reel-track video { height: 130px; border-radius: 12px; margin-right: 10px; }
   .pkg-img-sq { aspect-ratio: 16 / 9; }
