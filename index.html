@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Tech SG | Smart Home Consultancy &amp; Retailer in Singapore</title>
+  <meta name="description" content="Life Tech SG is a smart home device consultancy and retailer in Singapore. We advise on the right setup, supply the devices, and configure everything to run from one app or by voice. Packages for 3-room, 4-room and 5-room homes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <!-- Set before first paint so scroll-reveal elements start hidden without a flash. -->
+  <script>document.documentElement.classList.add('js-anim');</script>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="trust-bar">
+    <div class="container">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <span>Trusted by 1,200+ homeowners in Singapore</span>
+    </div>
+  </div>
+  <div class="container nav-wrap">
+    <a href="#top" class="logo">Life&nbsp;Tech&nbsp;<span>SG</span></a>
+    <nav class="site-nav" id="siteNav">
+      <a href="#setups">Packages</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#blog">Guides</a>
+      <a href="#contact">Visit us</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20to%20book%20a%20free%20smart%20home%20demo." target="_blank" rel="noopener">Book a Free Demo</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1>Seamless Tech for <em>Effortless Living</em></h1>
+      <p class="hero-sub">Life Tech SG is a smart home consultancy and retailer. We advise you on the right setup, supply the devices at package prices, and configure everything so your lights, fans, aircon, and curtains answer to one app or a quick word to Google. Most homes are ready just as they are, and it all comes together in an afternoon.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20to%20book%20a%20free%20smart%20home%20demo." target="_blank" rel="noopener">Book a Free Demo</a>
+        <a class="btn btn-text" href="#pricing">See packages for my home</a>
+      </div>
+      <ul class="hero-proof">
+        <li>Advice, devices, and setup under one roof</li>
+        <li>Google &amp; Alexa voice control</li>
+        <li>Full first-year warranty</li>
+      </ul>
+    </div>
+    <img class="hero-photo" src="assets/brochure-images/hero.jpeg" onerror="this.onerror=null;this.src='assets/brochure-images/page1_ltsg_smart_living_room.jpg'" alt="Smart living room with lights and curtains controlled from one app" loading="lazy">
+  </div>
+</section>
+
+<!-- ============ HOOK + FREE DOWNLOAD ============ -->
+<section class="lead-banner" id="guide">
+  <div class="container lead-wrap">
+    <div class="lead-copy">
+      <p class="lead-kicker">Free download</p>
+      <h2>Still fumbling for switches in the dark?</h2>
+      <p>Reaching for a different remote each time you want to cool the room? There is a calmer way to run your home, and it starts with a simple plan. Download our smart home automation guide, free, and see exactly what your home needs.</p>
+      <ul class="lead-points">
+        <li>A room-by-room switch checklist for your home size</li>
+        <li>The neutral wire question, answered simply</li>
+        <li>The choices worth making before you buy</li>
+      </ul>
+    </div>
+    <form class="lead-form" id="leadForm" novalidate>
+      <div class="lead-fields">
+        <div class="lead-field">
+          <label for="leadName">Name</label>
+          <input type="text" id="leadName" name="name" autocomplete="name" placeholder="Your name">
+          <span class="lead-error" id="err-name" hidden>Please enter your name.</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadEmail">Email</label>
+          <input type="email" id="leadEmail" name="email" autocomplete="email" placeholder="you@email.com">
+          <span class="lead-error" id="err-email" hidden>Please enter a valid email address.</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadPhone">WhatsApp number</label>
+          <input type="tel" id="leadPhone" name="phone" autocomplete="tel" inputmode="numeric" placeholder="e.g. 9123 4567">
+          <span class="lead-error" id="err-phone" hidden>Enter a valid Singapore mobile number (8 digits, starting with 8 or 9).</span>
+        </div>
+        <div class="lead-field">
+          <label for="leadHome">Type of housing</label>
+          <select id="leadHome" name="housing">
+            <option value="" selected disabled>Select your home</option>
+            <option value="3-Room">3-Room</option>
+            <option value="4-Room">4-Room</option>
+            <option value="5-Room">5-Room</option>
+            <option value="More">Bigger than 5-room</option>
+          </select>
+          <span class="lead-error" id="err-home" hidden>Please select your type of housing.</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary lead-submit" id="leadSubmit">Download the free guide</button>
+      <p class="lead-privacy">We'll send the guide and the occasional tip or deal. No spam, unsubscribe anytime.</p>
+    </form>
+    <div class="lead-success" id="leadSuccess" hidden>
+      <h3 id="leadSuccessTitle">Check your inbox</h3>
+      <p id="leadSuccessMsg">Thanks! Your guide is on its way to your email. Can't find it? Check spam, or <a id="leadFallback" href="assets/guides/no-reno-smart-home-guide-4-room.pdf" download>download it here</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REELS MARQUEE ============ -->
+<section class="reel-marquee" aria-label="As seen on the news and social media">
+  <p class="reel-title">As seen on the news &middot; Instagram &middot; TikTok &middot; Facebook</p>
+  <div class="reel-track reel-track-a">
+    <!-- Group 1: the six reels, read by assistive tech. -->
+    <video src="assets/reels/LifeTech-SG-Reel-1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-3.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-4.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-5.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-6.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    <!-- Groups 2 & 3: identical copies so the loop is seamless. -->
+    <video src="assets/reels/LifeTech-SG-Reel-1.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-2.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-3.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-4.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-5.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-6.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-1.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-2.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-3.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-4.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-5.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    <video src="assets/reels/LifeTech-SG-Reel-6.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  </div>
+</section>
+
+<!-- ============ GOOGLE REVIEWS ============ -->
+<section class="section section-reviews" id="reviews">
+  <div class="container">
+    <h2 class="section-title">What our customers say</h2>
+  </div>
+  <div class="reviews-marquee" id="reviewsGrid"><!-- auto-scrolling review track injected from js/main.js --></div>
+</section>
+
+<!-- ============ WE GET IT ============ -->
+<section class="section section-guide">
+  <div class="container">
+    <div class="guide-grid">
+      <div>
+        <h2>A home that greets you the moment you walk in.</h2>
+        <p>Everything you touch every day, working together and answering to one app or your voice. That is the feeling we design around.</p>
+        <p>Life Tech SG has fitted out homes across Singapore, from 3-room flats to multi-storey houses. As consultants, we plan the setup around how you live. As retailers, we supply every device in the package. Our system runs on Tuya, an open platform, so a fan from one brand and switches from another live together in a single app. You stay free to mix makers, and every package comes with a full first-year warranty and app setup done for you.</p>
+      </div>
+      <img class="guide-photo" src="assets/brochure-images/collage_ecosystem.jpeg" onerror="this.onerror=null;this.src='assets/brochure-images/collage_ecosystem.png'" alt="The Life Tech SG device ecosystem: panel, curtain track, fans, camera, doorbell, plug, and sensors" loading="lazy">
+    </div>
+    <div class="guide-badges">
+      <div class="badge-card">
+        <span class="badge-icon">🔓</span>
+        <h3>Open platform</h3>
+        <p>Built on Tuya. Mix brands freely in one app and keep your options open as you grow.</p>
+      </div>
+      <div class="badge-card">
+        <span class="badge-icon">🛡️</span>
+        <h3>Full first-year warranty</h3>
+        <p>Parts, labour, and service covered. Free 2-year limited extension for a social media review.</p>
+      </div>
+      <div class="badge-card">
+        <span class="badge-icon">⚙️</span>
+        <h3>Setup done for you</h3>
+        <p>App configuration and Google or Alexa voice control included in every package.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PICK YOUR SETUP ============ -->
+<section class="section section-setups" id="setups">
+  <div class="container">
+    <h2 class="section-title">Pick your setup</h2>
+    <div class="tier-grid">
+      <div class="tier-card tier-starter">
+        <img class="tier-img" src="assets/bundle-images/Starter.jpg" alt="Starter setup: a smart switch in a bright Singapore living room" loading="lazy">
+        <h3>Starter</h3>
+        <p class="tier-price">From <strong>$888</strong> <span class="nett">nett</span></p>
+        <p>Smart switches for your lights and fans. Control everything from the app or by voice.</p>
+        <ul>
+          <li>Smart switches</li>
+          <li>WiFi hubs</li>
+          <li>App config + Google</li>
+          <li>Earn 3 YUU points per $1 spent</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-essential tier-featured">
+        <p class="tier-flag">Most popular</p>
+        <img class="tier-img" src="assets/bundle-images/Essential.jpg" alt="Essential setup: a smart switch with IR remote and hubs in a Singapore home" loading="lazy">
+        <h3>Essential</h3>
+        <p class="tier-price">From <strong>$1,088</strong> <span class="nett">nett</span></p>
+        <p>Adds smart IR remotes so your normal aircon and TV join the app.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Smart IR remotes</li>
+          <li>Aircon &amp; TV in one app</li>
+          <li>Earn 3 YUU points per $1 spent</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-premium">
+        <img class="tier-img" src="assets/bundle-images/Premium.jpg" alt="Premium setup: LCD panel, smart curtain, and ceiling fan in a Singapore home" loading="lazy">
+        <h3>Premium</h3>
+        <p class="tier-price">From <strong>$1,588</strong> <span class="nett">nett</span></p>
+        <p>The complete home in one buy.</p>
+        <ul>
+          <li>Switches, hubs, 2 remotes</li>
+          <li>Master switch</li>
+          <li>A headline upgrade like a smart curtain or LCD panel</li>
+          <li>Any 3 free gifts</li>
+          <li>Earn 3 YUU points per $1 spent</li>
+        </ul>
+      </div>
+    </div>
+    <p class="setups-note">Want flexible power points? A <strong>LINE8 power track</strong> puts movable sockets along a premium track. Self-contained bundles from $1,388.</p>
+    <div class="center">
+      <a class="btn btn-primary btn-lg" href="#pricing">Get the package for my home</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING BY HOME SIZE ============ -->
+<section class="section section-pricing" id="pricing">
+  <div class="container">
+    <h2 class="section-title">Packages for your home</h2>
+    <p class="section-sub">Choose your home size to see exactly what fits. Every price is nett, with no GST to add.</p>
+
+    <div class="size-tabs" role="tablist" aria-label="Home size">
+      <button class="size-tab is-active" role="tab" aria-selected="true" data-size="3room">3-Room</button>
+      <button class="size-tab" role="tab" aria-selected="false" data-size="4room">4-Room</button>
+      <button class="size-tab" role="tab" aria-selected="false" data-size="5room">5-Room</button>
+      <button class="size-tab" role="tab" aria-selected="false" data-size="bigger">Bigger</button>
+    </div>
+
+    <div class="size-panel is-active" id="panel-3room" role="tabpanel">
+      <div class="pkg-grid pkg-grid-2">
+        <div class="pkg-card tier-starter">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page2_5_6_mowe-Rocker-2gang-White.png" alt="Starter package smart switches" loading="lazy">
+          <div class="pkg-body">
+            <h4>Starter</h4>
+            <p class="pkg-desc">8 smart switches, 2 WiFi hubs, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$888 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-essential">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page3_3-room-mowe.png" alt="Essential 3-room kit: switch, IR remote, and hub" loading="lazy">
+          <div class="pkg-body">
+            <h4>Essential</h4>
+            <p class="pkg-desc">8 switches, 2 hubs, 3 smart IR remotes, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,088 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <h3 class="table-heading">Go all-in with a Premium bundle</h3>
+      <div class="pkg-grid pkg-grid-3">
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_LCD_Smart_Control_Switch_nobg.png" alt="LCD smart control panel" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium A</span>
+            <h4>LCD Control</h4>
+            <p class="pkg-desc">LCD panel, 10 switches, 2 hubs, 2 remotes, master switch, 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,588 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_Line8_Power_Track_Black_Hairline_finish_straight_view_nobg.png" alt="LINE8 power track, black hairline finish" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium B</span>
+            <h4>LINE8</h4>
+            <p class="pkg-desc">1m track + 5 adaptors, 10 switches, 2 hubs, 2 remotes, master switch, 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/corner-fan.jpeg" alt="Smart corner fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium C</span>
+            <h4>Corner Fan</h4>
+            <p class="pkg-desc">Smart corner fan + same core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/smart-curtain.jpeg" alt="Motorised smart curtain track" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium D</span>
+            <h4>Smart Curtain</h4>
+            <p class="pkg-desc">Motorised curtain track (2-3m) + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/ceiling-fan.jpg" alt="Smart ceiling fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium E</span>
+            <h4>Ceiling Fan</h4>
+            <p class="pkg-desc">Smart ceiling fan + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <p class="panel-note">The 10 switches in the LINE8 and Premium bundles cover a 3-room home comfortably.</p>
+    </div>
+
+    <div class="size-panel" id="panel-4room" role="tabpanel" hidden>
+      <div class="pkg-grid pkg-grid-2">
+        <div class="pkg-card tier-starter">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page2_5_6_moweRocker-3Gang-Gold.png" alt="Starter package smart switches" loading="lazy">
+          <div class="pkg-body">
+            <h4>Starter</h4>
+            <p class="pkg-desc">10 smart switches, 2 WiFi hubs, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$988 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-essential">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page3_4-room-mowe.png" alt="Essential 4-room kit: switch, IR remote, and hub" loading="lazy">
+          <div class="pkg-body">
+            <h4>Essential</h4>
+            <p class="pkg-desc">10 switches, 2 hubs, 4 smart IR remotes, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,288 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <h3 class="table-heading">Go all-in with a Premium bundle</h3>
+      <div class="pkg-grid pkg-grid-3">
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_LCD_Smart_Control_Switch_nobg.png" alt="LCD smart control panel" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium A</span>
+            <h4>LCD Control</h4>
+            <p class="pkg-desc">LCD panel + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,588 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_Line8_Power_Track_Black_Hairline_finish_straight_view_nobg.png" alt="LINE8 power track, black hairline finish" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium B</span>
+            <h4>LINE8</h4>
+            <p class="pkg-desc">1m track + 5 adaptors + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/corner-fan.jpeg" alt="Smart corner fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium C</span>
+            <h4>Corner Fan</h4>
+            <p class="pkg-desc">Smart corner fan + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/smart-curtain.jpeg" alt="Motorised smart curtain track" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium D</span>
+            <h4>Smart Curtain</h4>
+            <p class="pkg-desc">Motorised curtain track (2-3m) + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/ceiling-fan.jpg" alt="Smart ceiling fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium E</span>
+            <h4>Ceiling Fan</h4>
+            <p class="pkg-desc">Smart ceiling fan + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <p class="panel-note">The bundle's 10 switches suit most 4-room layouts. Add a switch or a remote à la carte if a room needs it.</p>
+    </div>
+
+    <div class="size-panel" id="panel-5room" role="tabpanel" hidden>
+      <div class="pkg-grid pkg-grid-2">
+        <div class="pkg-card tier-starter">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page5_6_mowe_Rocker-3gang-Grey.png" alt="Starter package smart switches" loading="lazy">
+          <div class="pkg-body">
+            <h4>Starter</h4>
+            <p class="pkg-desc">12 smart switches, 2 WiFi hubs, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,088 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-essential">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page3_5-room-mowe.png" alt="Essential 5-room kit: switch, IR remote, and hub" loading="lazy">
+          <div class="pkg-body">
+            <h4>Essential</h4>
+            <p class="pkg-desc">12 switches, 2 hubs, 5 smart IR remotes, app config + Google</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,388 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <h3 class="table-heading">Go all-in with a Premium bundle</h3>
+      <div class="pkg-grid pkg-grid-3">
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_LCD_Smart_Control_Switch_nobg.png" alt="LCD smart control panel" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium A</span>
+            <h4>LCD Control</h4>
+            <p class="pkg-desc">LCD panel + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,588 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/page7_8_Line8_Power_Track_Black_Hairline_finish_straight_view_nobg.png" alt="LINE8 power track, black hairline finish" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium B</span>
+            <h4>LINE8</h4>
+            <p class="pkg-desc">1m track + 5 adaptors + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/corner-fan.jpeg" alt="Smart corner fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium C</span>
+            <h4>Corner Fan</h4>
+            <p class="pkg-desc">Smart corner fan + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,688 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/smart-curtain.jpeg" alt="Motorised smart curtain track" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium D</span>
+            <h4>Smart Curtain</h4>
+            <p class="pkg-desc">Motorised curtain track (2-3m) + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium">
+          <img class="pkg-img pkg-img-sq img-contain" src="assets/brochure-images/ceiling-fan.jpg" alt="Smart ceiling fan" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium E</span>
+            <h4>Ceiling Fan</h4>
+            <p class="pkg-desc">Smart ceiling fan + core kit + 3 free gifts</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <p class="panel-note">A 5-room home usually needs about 12 switches. The Premium and LINE8 bundles ship with 10, so add 2 more à la carte for full coverage.</p>
+    </div>
+
+    <div class="size-panel" id="panel-bigger" role="tabpanel" hidden>
+      <div class="pkg-grid pkg-grid-2">
+        <div class="pkg-card tier-essential">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page3_mutli-storey-mowe.png" alt="Multi-storey smart home kit" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-essential">Essential</span>
+            <h4>Multi-Storey House</h4>
+            <p class="pkg-desc">25 smart switches, 3 WiFi hubs, 5 smart IR remotes, app config + Google integration</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$2,799 <span class="nett">nett</span></p>
+          </div>
+        </div>
+      </div>
+      <p class="panel-note">Landed home or something in between? Text us your floor plan and we'll size a package for you.</p>
+    </div>
+
+    <div class="callout callout-upgrade">
+      <strong>Upgrades &amp; extras:</strong> Mausklick switch design or 4-gang switch adds $10 per switch (usual price $15) on any tier. LINE8 installation is $50 per track segment, no hidden fees or GST. Premium LINE8 colour (10 finishes, from Galaxy Blue to Indian Marble) adds $100 to any LINE8 power track add-on; black hairline is the base price.
+    </div>
+
+    <h3 class="table-heading">LINE8 power track bundles</h3>
+    <p class="panel-note" style="margin-bottom: 20px;">A LINE8 power track puts movable power points along a premium track: add, slide, or remove sockets on a kitchen counter, TV console, or workspace whenever you need to. Each bundle below is self-contained and already includes its own 10 smart switches and 2 hubs, so it can be your whole starter setup on its own. IR remotes are not part of these bundles. Premium colour adds $100. Installation is $50 per track segment, handled by LINE8. The track can be cut into segments (45cm minimum) up to the bundle length.</p>
+    <div class="pkg-grid pkg-grid-2">
+        <div class="pkg-card tier-addon">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page5_6_line8-black-4sockets.png" alt="1.2m LINE8 power track with 4 socket adaptors" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-addon">Black hairline</span>
+            <h4>1.2m power track</h4>
+            <p class="pkg-desc">1.2m track + 4 adaptors, 10 switches + 2 hubs</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,388 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-addon">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page5_6_line8-black-8sockets.png" alt="2.0m LINE8 power track with 8 socket adaptors" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-addon">Black hairline</span>
+            <h4>2.0m power track</h4>
+            <p class="pkg-desc">2.0m track + 8 adaptors, 10 switches + 2 hubs</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,788 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium tier-featured">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page5_6_Line8_Power_Track_Premium_Colour_sample_fan_nobg.png" alt="1.2m LINE8 power track in a premium colour finish with 4 socket adaptors" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium colour</span>
+            <h4>1.2m power track</h4>
+            <p class="pkg-desc">1.2m track + 4 adaptors, 10 switches + 2 hubs</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,488 <span class="nett">nett</span></p>
+          </div>
+        </div>
+        <div class="pkg-card tier-premium tier-featured">
+          <img class="pkg-img pkg-img-wide img-contain" src="assets/brochure-images/page5_6_Line8_Power_Track_Premium_Colour_sample_fan_8_adapters_nobg.png" alt="2.0m LINE8 power track in a premium colour finish with 8 socket adaptors" loading="lazy">
+          <div class="pkg-body">
+            <span class="tier-badge tb-premium">Premium colour</span>
+            <h4>2.0m power track</h4>
+            <p class="pkg-desc">2.0m track + 8 adaptors, 10 switches + 2 hubs</p>
+            <p class="pkg-perk">3 YUU points per $1 spent</p>
+            <p class="pkg-price">$1,888 <span class="nett">nett</span></p>
+          </div>
+        </div>
+    </div>
+
+    <h4 class="line8-colours-heading">Premium colour: choose from 10 LINE8 finishes</h4>
+    <p class="panel-note" style="margin-bottom: 20px;">A premium finish adds $100 to either track above. Same track, same warranty, just dressed to match your home.</p>
+    <div class="line8-swatches">
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Galaxy_Blue.png.avif" alt="LINE8 power track in Galaxy Blue" loading="lazy"><figcaption>Galaxy Blue</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Brazilian_Rosewood.png.avif" alt="LINE8 power track in Brazilian Rosewood" loading="lazy"><figcaption>Brazilian Rosewood</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Rose_Gold.png.avif" alt="LINE8 power track in Rose Gold" loading="lazy"><figcaption>Rose Gold</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Burmese_Teak.png.avif" alt="LINE8 power track in Burmese Teak" loading="lazy"><figcaption>Burmese Teak</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Gold_Hairline.png.avif" alt="LINE8 power track in Gold Hairline" loading="lazy"><figcaption>Gold Hairline</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_American_Spruce.png.avif" alt="LINE8 power track in American Spruce" loading="lazy"><figcaption>American Spruce</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Champagne_Gold.png.avif" alt="LINE8 power track in Champagne Gold" loading="lazy"><figcaption>Champagne Gold</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Silver_Hairline.png.avif" alt="LINE8 power track in Silver Hairline" loading="lazy"><figcaption>Silver Hairline</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_White_Marble.png.avif" alt="LINE8 power track in Indian Marble" loading="lazy"><figcaption>Indian Marble</figcaption></figure>
+      <figure class="swatch"><img src="assets/brochure-images/page5_6_Pearl_White_98ade6bb-eb8d-4ebd-8c2b-e6f67a1602f6.png.avif" alt="LINE8 power track in Pearl White" loading="lazy"><figcaption>Pearl White</figcaption></figure>
+    </div>
+
+    <div class="callout" style="margin-top: 24px;">
+      <strong>Already getting one of the packages above?</strong> The LINE8 prices here are for the full self-contained bundles. <a href="https://wa.me/6588547512?text=Hi!%20I'm%20getting%20one%20of%20your%20smart%20home%20packages%20and%20would%20like%20to%20add%20a%20LINE8%20power%20track.%20What%20would%20the%20top-up%20be%3F" target="_blank" rel="noopener">Text us on WhatsApp</a> and we'll quote the top-up for your exact setup.
+    </div>
+
+    <div class="perks">
+      <div class="perk"><span>🎁</span> Earn 3 YUU points per dollar. A typical package returns around 3,000 points, roughly $27 in value.</div>
+      <div class="perk"><span>🛡️</span> Full first-year warranty on parts, labour, and service. Free 2-year limited extension for a social media review.</div>
+      <div class="perk"><span>💡</span> Smart lights through our partner Zenterra: 10% off when we refer you.</div>
+    </div>
+
+    <div class="center">
+      <a class="btn btn-primary btn-lg" href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20the%20smart%20home%20package%20for%20my%20home." target="_blank" rel="noopener">Get the package for my home</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section section-steps" id="how-it-works">
+  <div class="container">
+    <h2 class="section-title">How it works</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <h3>Say hello</h3>
+        <p>Text us or drop by the showroom. Tell us your home size and what you want to control.</p>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <h3>Get matched</h3>
+        <p>We match a package to your rooms and your budget.</p>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <h3>Quick switch swap</h3>
+        <p>Your electrician swaps the old switches for smart ones. Quick job.</p>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <h3>We set everything up</h3>
+        <p>We set up the app and your Google or Alexa voice control.</p>
+      </li>
+    </ol>
+    <div class="callout">
+      <strong>Renovating?</strong> Visit us before work starts. We do a site visit with your electrician before the electrical work, then return near the end of your reno to finish the setup. Usually a half-day.
+    </div>
+  </div>
+</section>
+
+<!-- ============ PICTURE THIS ============ -->
+<section class="section section-vision">
+  <div class="container narrow">
+    <h2>Picture this</h2>
+    <p class="vision-lead">You say <em>"Hey Google, movie time."</em> The lights dim, the fan drops a notch, the aircon settles to 24. One sentence. Done. Or check the app from the office and switch off the light your kid left on.</p>
+    <p class="vision-warn">That ease is the whole point: the small daily friction of switches and remotes quietly fades into the background, and home simply feels lighter.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section-faq" id="faq">
+  <div class="container narrow">
+    <h2 class="section-title">Common questions</h2>
+    <div class="accordion">
+
+      <details>
+        <summary>Do I need a neutral wire?</summary>
+        <p>Usually no. Most Singapore homes don't have one at the switch, and our non-neutral switches work fine as long as your lights are 7W or above. A neutral wire is only needed for smart dimmer switches or the LCD panel switch. <a href="blog/neutral-wire-singapore-smart-home.html">Read the full guide</a></p>
+      </details>
+
+      <details>
+        <summary>Does the package include installation?</summary>
+        <p>We set up the app and basic Google or Alexa voice control. Swapping the switches is done by your own electrician. LINE8 power track is installed by LINE8's team at $50 per track segment.</p>
+      </details>
+
+      <details>
+        <summary>Can I use my own electrician for the LINE8 track?</summary>
+        <p>You can, but LINE8 will not honour the warranty if their team didn't install it.</p>
+      </details>
+
+      <details>
+        <summary>I'm getting one of your packages. How much to add a LINE8 track on top?</summary>
+        <p>The LINE8 prices on this page are for self-contained bundles that include their own switches and hubs. If you're taking a Starter, Essential, or Premium package as well, <a href="https://wa.me/6588547512?text=Hi!%20I'm%20getting%20one%20of%20your%20smart%20home%20packages%20and%20would%20like%20to%20add%20a%20LINE8%20power%20track.%20What%20would%20the%20top-up%20be%3F" target="_blank" rel="noopener">text us</a> and we'll quote the top-up for your exact setup so you don't pay for anything twice.</p>
+      </details>
+
+      <details>
+        <summary>Does it work with Apple HomeKit?</summary>
+        <p>Generally no. Our system is built for Google and Alexa. <a href="blog/open-vs-closed-smart-home.html">More on platforms</a></p>
+      </details>
+
+      <details>
+        <summary>How is this different from Aqara?</summary>
+        <p>Aqara is a closed ecosystem, so you buy everything Aqara. Ours runs on Tuya, so you can mix brands in one app. <a href="blog/open-vs-closed-smart-home.html">Open vs closed, explained</a></p>
+      </details>
+
+      <details>
+        <summary>Does my WiFi need to be fast?</summary>
+        <p>Coverage matters more than speed. Make sure you have enough mesh nodes or access points to clear the dead spots.</p>
+      </details>
+
+      <details>
+        <summary>What if the WiFi goes down?</summary>
+        <p>App control pauses until WiFi is back, but every smart switch still works by hand. Press it like a normal switch.</p>
+      </details>
+
+      <details>
+        <summary>What lights do I need?</summary>
+        <p>Only dimming needs smart lights. For everything else, normal lights are fine. Smart bulbs cost about 3 times a regular bulb, and they save you from wiring in a neutral-dependent dimmer switch. <a href="blog/smart-bulbs-vs-dimmer-switch.html">Smart bulbs vs dimmer switches</a></p>
+      </details>
+
+      <details>
+        <summary>Do I need a smart aircon?</summary>
+        <p>No. Keep your normal aircon and pair it with our smart remote to control temperature, fan speed, and mode from the same app. Smart aircons use their own separate app and won't integrate. <a href="blog/skip-the-smart-aircon.html">Why we say skip it</a></p>
+      </details>
+
+      <details>
+        <summary>My home is already renovated. Can I still go smart?</summary>
+        <p>Yes. Smart switches are largely plug-and-play. Renovation only comes up in specific cases, like pulling a neutral wire for a panel switch or deepening a shallow switch box. <a href="blog/already-renovated-go-smart.html">The full story</a></p>
+      </details>
+
+      <details>
+        <summary>Is there after-sales support?</summary>
+        <p>Yes. We help you troubleshoot, and a technician visits if needed.</p>
+      </details>
+
+      <details>
+        <summary>What are the payment terms?</summary>
+        <p>A 50% deposit confirms your order, and the balance is paid once your smart home setup is complete. We accept PayNow and bank transfer.</p>
+      </details>
+
+      <details>
+        <summary>Do your prices include GST?</summary>
+        <p>Every price you see is nett. We don't charge GST, so what's listed is exactly what you pay.</p>
+      </details>
+
+      <details>
+        <summary>What warranty do you get?</summary>
+        <p>Full first-year warranty on parts, labour, and service. Plus a free 2-year limited extension (parts covered) in exchange for a social media review.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="section section-blog" id="blog">
+  <div class="container">
+    <h2 class="section-title">Guides from the showroom</h2>
+    <p class="section-sub">Straight answers to the questions we hear every week.</p>
+    <div class="blog-grid">
+      <a class="blog-card" href="blog/already-renovated-go-smart.html">
+        <img class="blog-thumb" src="assets/blog/already-renovated.svg" alt="Abstract HDB block facade with one smart-lit window" loading="lazy">
+        <span class="blog-tag">Most read</span>
+        <h3>Already renovated? You can still go smart.</h3>
+        <p>In most homes, going smart means swapping switches, not touching walls.</p>
+        <span class="blog-more">Read the guide</span>
+      </a>
+      <a class="blog-card" href="blog/neutral-wire-singapore-smart-home.html">
+        <img class="blog-thumb" src="assets/blog/neutral-wire.svg" alt="Abstract wiring diagram with a missing neutral line" loading="lazy">
+        <h3>Do you need a neutral wire for a smart home in Singapore?</h3>
+        <p>Usually no. And here's exactly when you do.</p>
+        <span class="blog-more">Read the guide</span>
+      </a>
+      <a class="blog-card" href="blog/smart-bulbs-vs-dimmer-switch.html">
+        <img class="blog-thumb" src="assets/blog/smart-bulbs.svg" alt="Abstract dimming scale of glowing bulbs" loading="lazy">
+        <h3>Want to dim your lights? Buy smart bulbs, not a dimmer switch.</h3>
+        <p>For dimming, smart bulbs beat a dimmer switch almost every time.</p>
+        <span class="blog-more">Read the guide</span>
+      </a>
+      <a class="blog-card" href="blog/skip-the-smart-aircon.html">
+        <img class="blog-thumb" src="assets/blog/skip-aircon.svg" alt="Abstract aircon airflow with a smart IR remote" loading="lazy">
+        <h3>Skip the smart aircon. Do this instead.</h3>
+        <p>Buy a normal aircon and make it smart with an IR remote.</p>
+        <span class="blog-more">Read the guide</span>
+      </a>
+      <a class="blog-card" href="blog/open-vs-closed-smart-home.html">
+        <img class="blog-thumb" src="assets/blog/open-vs-closed.svg" alt="Abstract open network of connected devices beside a closed box" loading="lazy">
+        <h3>Open vs closed smart homes: Tuya, Aqara, and Apple Home.</h3>
+        <p>An open platform lets you mix brands in one app. A closed one locks you in.</p>
+        <span class="blog-more">Read the guide</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT US ============ -->
+<section class="section section-contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Visit us</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <img class="contact-img" src="assets/brochure-images/HQ.jpeg" alt="Inside the Life Tech SG HQ and smart home showroom on Mohamed Sultan Road" loading="lazy">
+        <h3>Life Tech SG HQ</h3>
+        <p>33 Mohamed Sultan Rd, #02-01<br>Singapore 238977</p>
+      </div>
+      <div class="contact-card">
+        <img class="contact-img" src="assets/brochure-images/page9_zenterra_satellite_showroom.jpg" alt="Zenterra Lighting satellite showroom in Jurong East" loading="lazy">
+        <h3>Satellite showroom &middot; Zenterra Lighting</h3>
+        <p>Block 259 Jurong East St 24, #01-439<br>Singapore 600259</p>
+      </div>
+      <div class="contact-card">
+        <h3>Talk to a specialist</h3>
+        <p>WhatsApp us: <a href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20to%20find%20out%20more%20about%20smart%20home%20packages." target="_blank" rel="noopener"><strong>8854 7512</strong></a><br>
+        Email: <a href="mailto:sales@lifetechsg.com"><strong>sales@lifetechsg.com</strong></a></p>
+        <p class="contact-social">Follow along on <a href="https://www.facebook.com/lifetechsg/" target="_blank" rel="noopener">Facebook</a>, <a href="https://www.instagram.com/lifetechsg/" target="_blank" rel="noopener">Instagram</a>, and <a href="https://www.tiktok.com/@lifetechsg" target="_blank" rel="noopener">TikTok</a> for installs, tips, and flash deals.</p>
+      </div>
+      <div class="contact-card">
+        <h3>Opening hours</h3>
+        <p>Tue to Fri: 11am to 6pm<br>Sat: 11am to 4pm</p>
+        <p class="contact-fine">By appointment only. Final appointment is one hour before closing. Closed Sun, Mon, and public holidays. We reply to messages within the next working day.</p>
+      </div>
+    </div>
+    <p class="support-line">Already a customer and need troubleshooting? Message us on WhatsApp at <a href="https://wa.me/6584483825?text=Hi!%20I%20need%20some%20troubleshooting%20help%20with%20my%20smart%20home." target="_blank" rel="noopener"><strong>8448 3825</strong></a> and we'll help you sort it.</p>
+    <div class="center">
+      <a class="btn btn-primary btn-lg" href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20to%20book%20a%20free%2C%20no-obligation%20demo." target="_blank" rel="noopener">Book a free, no-obligation demo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-wrap">
+    <div class="footer-social">
+      <a href="https://www.facebook.com/lifetechsg/" target="_blank" rel="noopener" aria-label="Life Tech SG on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+      <a href="https://www.instagram.com/lifetechsg/" target="_blank" rel="noopener" aria-label="Life Tech SG on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.6s0 3.4.1 4.6c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.6s0-3.4-.1-4.6c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.2-8.3a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
+      <a href="https://www.tiktok.com/@lifetechsg" target="_blank" rel="noopener" aria-label="Life Tech SG on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3v11.6a2.4 2.4 0 1 1-2.1-2.4V9.1a5.4 5.4 0 1 0 5.1 5.4V8.6a7.3 7.3 0 0 0 4 1.2V6.9a4.3 4.3 0 0 1-3-1.1z"/></svg></a>
+    </div>
+    <p><strong>Life Tech SG</strong> &middot; Smart home consultancy &amp; retailer &middot; Seamless Tech for Effortless Living</p>
+    <p>33 Mohamed Sultan Rd, #02-01, Singapore 238977 &middot; <a href="https://wa.me/6588547512" target="_blank" rel="noopener">8854 7512</a> &middot; <a href="mailto:sales@lifetechsg.com">sales@lifetechsg.com</a></p>
+  </div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/6588547512?text=Hi!%20I'd%20like%20to%20find%20out%20more%20about%20smart%20home%20packages." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff" aria-hidden="true"><path d="M16 .8C7.6.8.8 7.6.8 16c0 2.7.7 5.3 2 7.6L.8 31.2l7.8-2c2.2 1.2 4.7 1.9 7.4 1.9 8.4 0 15.2-6.8 15.2-15.1C31.2 7.6 24.4.8 16 .8zm0 27.7c-2.3 0-4.6-.6-6.5-1.8l-.5-.3-4.6 1.2 1.2-4.5-.3-.5c-1.3-2-2-4.4-2-6.8C3.3 9 9 3.3 16 3.3S28.7 9 28.7 16 23 28.5 16 28.5zm7-9.5c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.5-.2.3-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.3-1.4 3.3s1.4 3.8 1.6 4.1c.2.3 2.8 4.3 6.8 6 .9.4 1.7.7 2.2.8 1 .3 1.8.3 2.5.2.8-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
