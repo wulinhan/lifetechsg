@@ -29,7 +29,9 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Force light form controls even when the visitor's OS/browser is in dark mode,
+   so Chromium doesn't render autofilled inputs with its dark green theme. */
+html { scroll-behavior: smooth; color-scheme: light; }
 
 body {
   font-family: var(--font);
@@ -174,6 +176,7 @@ a { color: var(--md-ink); }
   font-family: var(--font); font-size: 0.95rem; color: var(--md-ink);
   background: #fff; border: 2px solid transparent; border-radius: 10px;
   padding: 11px 14px; outline: none; width: 100%;
+  color-scheme: light; /* keep autofill light so the box-shadow trick below covers it */
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .lead-field select:invalid, .lead-field select option[value=""] { color: var(--md-ink-faint); }
