@@ -349,7 +349,27 @@ if (navToggle && siteNav) {
       el.classList.add('is-visible');
       io.unobserve(el);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  }, {
+    // Pixel margin (not %) — percentage rootMargins are unreliable on iOS
+    // Safari. threshold 0 fires the moment an item peeks in, so the fade-up
+    // plays as it rises into view and nothing can get stranded hidden.
+    rootMargin: '0px 0px -64px 0px',
+    threshold: 0
+  });
 
   items.forEach(function (el) { io.observe(el); });
+
+  // Safety net: if anything is still hidden once the page settles (e.g. an item
+  // that loaded already within the viewport on a short mobile screen), reveal it.
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      items.forEach(function (el) {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          el.classList.add('is-visible');
+          io.unobserve(el);
+        }
+      });
+    }, 200);
+  });
 })();
