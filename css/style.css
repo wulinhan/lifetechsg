@@ -729,11 +729,39 @@ img.pkg-img {
 }
 
 /* ============ Motion: scroll reveal + micro-interactions ============ */
-/* Reveal only exists when the visitor hasn't asked to reduce motion. Wrapping
-   the hidden state in this media query means reduced-motion users never get it,
-   so everything is simply visible for them with no extra rules. The .js-anim
-   gate (set in <head> before first paint) keeps no-JS visitors seeing content
-   and avoids any flash. */
+/* The fade-in applies to everyone. A pure opacity change is not "motion", so it
+   is safe under reduced-motion — and it means the effect still shows in the many
+   in-app browsers (Instagram/TikTok/Facebook) that report reduced-motion. The
+   .js-anim gate (set in <head> before first paint) keeps no-JS visitors seeing
+   content and avoids any flash. */
+.js-anim .hero-copy,
+.js-anim .hero-photo,
+.js-anim .section-title,
+.js-anim .lead-copy,
+.js-anim .lead-form,
+.js-anim .guide-grid > div,
+.js-anim .guide-photo,
+.js-anim .badge-card,
+.js-anim .tier-card,
+.js-anim .table-heading,
+.js-anim .pkg-card,
+.js-anim .line8-swatches .swatch,
+.js-anim .perk,
+.js-anim .steps li,
+.js-anim .section-vision .container > *,
+.js-anim .accordion details,
+.js-anim .blog-card,
+.js-anim .contact-card {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* !important so it beats the higher-specificity hidden selectors above
+   (e.g. .steps li, .guide-grid > div) once JS adds the class. */
+.js-anim .is-visible { opacity: 1 !important; }
+
+/* The upward slide is the actual "motion", so it is added only when the visitor
+   allows motion. Reduced-motion visitors still get the fade, just no movement. */
 @media (prefers-reduced-motion: no-preference) {
   .js-anim .hero-copy,
   .js-anim .hero-photo,
@@ -753,15 +781,9 @@ img.pkg-img {
   .js-anim .accordion details,
   .js-anim .blog-card,
   .js-anim .contact-card {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform: translateY(24px);
   }
-  /* !important so it beats the higher-specificity hidden selectors above
-     (e.g. .steps li, .guide-grid > div) once JS adds the class. The transition
-     still comes from the base rule, so elements animate in smoothly. */
-  .js-anim .is-visible { opacity: 1 !important; transform: none !important; }
+  .js-anim .is-visible { transform: none !important; }
 }
 
 /* Micro-interaction: tactile press on every button. */

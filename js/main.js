@@ -322,7 +322,6 @@ if (navToggle && siteNav) {
 // only hides these when motion is allowed, so if we bail here (reduced motion,
 // or no IntersectionObserver) everything is simply shown.
 (function () {
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SELECTOR = [
     '.hero-copy', '.hero-photo', '.section-title', '.lead-copy', '.lead-form',
     '.guide-grid > div', '.guide-photo', '.badge-card', '.tier-card',
@@ -333,7 +332,9 @@ if (navToggle && siteNav) {
   const items = Array.prototype.slice.call(document.querySelectorAll(SELECTOR));
   if (!items.length) return;
 
-  if (reduce || !('IntersectionObserver' in window)) {
+  // Always observe — reduced-motion visitors still get the fade (the CSS just
+  // withholds the upward slide). Only bail if the API is missing entirely.
+  if (!('IntersectionObserver' in window)) {
     items.forEach(function (el) { el.classList.add('is-visible'); });
     return;
   }
