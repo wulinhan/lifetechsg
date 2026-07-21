@@ -724,3 +724,84 @@ img.pkg-img {
   .pkg-img-sq { aspect-ratio: 16 / 9; }
   .wa-fab { left: 16px; bottom: 16px; width: 54px; height: 54px; }
 }
+
+/* ============ Motion: scroll reveal + micro-interactions ============ */
+/* Reveal only exists when the visitor hasn't asked to reduce motion. Wrapping
+   the hidden state in this media query means reduced-motion users never get it,
+   so everything is simply visible for them with no extra rules. The .js-anim
+   gate (set in <head> before first paint) keeps no-JS visitors seeing content
+   and avoids any flash. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-anim .hero-copy,
+  .js-anim .hero-photo,
+  .js-anim .section-title,
+  .js-anim .lead-copy,
+  .js-anim .lead-form,
+  .js-anim .guide-grid > div,
+  .js-anim .guide-photo,
+  .js-anim .badge-card,
+  .js-anim .tier-card,
+  .js-anim .table-heading,
+  .js-anim .pkg-card,
+  .js-anim .line8-swatches .swatch,
+  .js-anim .perk,
+  .js-anim .steps li,
+  .js-anim .section-vision .container > *,
+  .js-anim .accordion details,
+  .js-anim .blog-card,
+  .js-anim .contact-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  /* !important so it beats the higher-specificity hidden selectors above
+     (e.g. .steps li, .guide-grid > div) once JS adds the class. The transition
+     still comes from the base rule, so elements animate in smoothly. */
+  .js-anim .is-visible { opacity: 1 !important; transform: none !important; }
+}
+
+/* Micro-interaction: tactile press on every button. */
+.btn { will-change: transform; }
+.btn:active { transform: translateY(1px) scale(0.99); }
+
+/* Give the previously-static cards the same gentle hover lift as the others. */
+.badge-card, .steps li, .contact-card, .perk {
+  transition: transform 0.18s ease, box-shadow 0.22s ease;
+}
+.badge-card:hover, .steps li:hover, .contact-card:hover, .perk:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--elev-2);
+}
+
+/* Colour swatches nudge up on hover. */
+.swatch img { transition: transform 0.18s ease, box-shadow 0.22s ease; }
+.swatch:hover img { transform: translateY(-3px) scale(1.04); box-shadow: var(--elev-2); }
+
+/* Photos in the location cards ease in slightly on hover. */
+.contact-card { overflow: hidden; }
+.contact-img { transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1); }
+.contact-card:hover .contact-img { transform: scale(1.04); }
+
+/* Nav links grow an underline from the centre on hover. */
+.site-nav a { position: relative; }
+.site-nav a::after {
+  content: ''; position: absolute; left: 12px; right: 12px; bottom: 6px;
+  height: 2px; background: var(--md-ink); border-radius: 2px;
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 0.22s ease;
+}
+.site-nav a:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn:active,
+  .badge-card:hover, .steps li:hover, .contact-card:hover, .perk:hover,
+  .swatch:hover img, .contact-card:hover .contact-img { transform: none !important; }
+  .site-nav a::after { display: none; }
+}
+
+/* On small screens the nav is a stacked menu; skip the underline sweep there. */
+@media (max-width: 900px) {
+  .site-nav a::after { display: none; }
+}

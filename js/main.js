@@ -15,6 +15,13 @@ tabs.forEach(function (tab) {
       const isMatch = panel.id === 'panel-' + tab.dataset.size;
       panel.classList.toggle('is-active', isMatch);
       panel.hidden = !isMatch;
+      // The scroll-reveal observer can't watch cards while their panel is
+      // display:none, so reveal a freshly-shown panel's cards straight away.
+      if (isMatch) {
+        panel.querySelectorAll('.pkg-card').forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+      }
     });
   });
 });
@@ -310,3 +317,39 @@ if (navToggle && siteNav) {
     });
   });
 }
+
+// Scroll reveal: ease elements in as they enter the viewport. The matching CSS
+// only hides these when motion is allowed, so if we bail here (reduced motion,
+// or no IntersectionObserver) everything is simply shown.
+(function () {
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SELECTOR = [
+    '.hero-copy', '.hero-photo', '.section-title', '.lead-copy', '.lead-form',
+    '.guide-grid > div', '.guide-photo', '.badge-card', '.tier-card',
+    '.table-heading', '.pkg-card', '.line8-swatches .swatch', '.perk',
+    '.steps li', '.section-vision .container > *', '.accordion details',
+    '.blog-card', '.contact-card'
+  ].join(',');
+  const items = Array.prototype.slice.call(document.querySelectorAll(SELECTOR));
+  if (!items.length) return;
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      // Gentle stagger between siblings in the same row/grid.
+      const siblings = el.parentElement ? el.parentElement.children : [el];
+      const idx = Array.prototype.indexOf.call(siblings, el);
+      el.style.transitionDelay = Math.min(idx, 5) * 70 + 'ms';
+      el.classList.add('is-visible');
+      io.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+  items.forEach(function (el) { io.observe(el); });
+})();
