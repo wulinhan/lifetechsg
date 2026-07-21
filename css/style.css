@@ -265,8 +265,9 @@ img.pkg-img {
   display: flex; width: max-content;
   will-change: transform; /* promote to its own layer for smooth mobile scroll */
 }
-.reel-track-a { animation: reelScrollA 55s linear infinite; }
-.reel-track-b { animation: reelScrollB 55s linear infinite; margin-top: 16px; }
+/* Single row of all six reels. The group is twice as wide as the old two-row
+   layout, so the duration is doubled to keep the same calm scroll speed. */
+.reel-track-a { animation: reelScrollA 110s linear infinite; }
 /* Only pause on hover-capable pointers; a tap on touch must never freeze it */
 @media (hover: hover) {
   .reel-track:hover { animation-play-state: paused; }
@@ -276,14 +277,10 @@ img.pkg-img {
   border-radius: 16px; box-shadow: var(--elev-1); background: #000;
   margin-right: 16px; /* uniform spacing keeps the one-group loop seamless */
 }
-/* Each track holds 3 identical groups; shifting exactly one group loops seamlessly */
+/* The track holds 3 identical groups; shifting exactly one group loops seamlessly */
 @keyframes reelScrollA {
   from { transform: translateX(0); }
   to { transform: translateX(-33.3333%); }
-}
-@keyframes reelScrollB {
-  from { transform: translateX(-33.3333%); }
-  to { transform: translateX(0); }
 }
 
 /* ---- Hero ---- */
@@ -723,7 +720,6 @@ img.pkg-img {
   .pkg-grid-2, .pkg-grid-3 { grid-template-columns: 1fr; }
   .lead-fields { grid-template-columns: 1fr; }
   .reel-track video { height: 130px; border-radius: 12px; margin-right: 10px; }
-  .reel-track-b { margin-top: 10px; }
   .pkg-img-sq { aspect-ratio: 16 / 9; }
   .wa-fab { left: 16px; bottom: 16px; width: 54px; height: 54px; }
 }
