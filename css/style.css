@@ -655,6 +655,9 @@ img.pkg-img {
 .footer-social svg { width: 19px; height: 19px; fill: currentColor; }
 .site-footer strong { color: #fff; }
 .site-footer a { color: #d6d6d6; text-decoration: none; }
+.footer-legal { margin-top: 12px; font-size: 0.85rem; }
+.footer-legal a { text-decoration: underline; text-underline-offset: 3px; }
+.footer-legal a:hover { color: #fff; }
 
 /* ---- WhatsApp FAB ---- */
 .wa-fab {
