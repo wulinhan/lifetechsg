@@ -45,8 +45,12 @@ module.exports = async (req, res) => {
     return;
   }
 
+  // `status` reports what happened to the Meta call so the integration can be
+  // checked from outside. It never affects the visitor: the response is always
+  // 200 and they are already on their way to WhatsApp.
+  let status = 'sent';
   try {
-    await sendMetaEvent({
+    const result = await sendMetaEvent({
       eventName: event,
       eventId: String(m.event_id).slice(0, 100),
       eventSourceUrl: String(m.event_source_url || '').slice(0, 500),
@@ -56,10 +60,14 @@ module.exports = async (req, res) => {
       clientIp: clientIpFrom(req),
       userAgent: req.headers['user-agent'],
     });
+    if (result && result.skipped) status = 'skipped:' + result.skipped;
+    else if (result && typeof result.events_received === 'number') {
+      status = 'received:' + result.events_received;
+    }
   } catch (err) {
-    // Never surface ad-reporting problems to the visitor; they are mid-click.
+    status = 'error';
     console.error('Meta CAPI error:', err.message);
   }
 
-  res.status(200).json({ ok: true });
+  res.status(200).json({ ok: true, meta: status });
 };
