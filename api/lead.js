@@ -1,15 +1,24 @@
 // Vercel serverless function: receives lead form submissions and emails the
 // housing-specific No-Reno Smart Home Guide via Resend.
 //
+// It also reports the lead to Meta via the Conversions API (server-side), which
+// is deduplicated against the browser Pixel event by a shared event_id.
+//
 // Required environment variables (set in the Vercel project settings):
 //   RESEND_API_KEY   - your Resend API key (never commit this to the repo)
 // Optional:
 //   RESEND_FROM      - verified sender, e.g. "Life Tech SG <guide@lifetechsg.com>"
 //                      (defaults to Resend's onboarding sender for testing)
 //   LEAD_NOTIFY_TO   - an address to notify about each new lead, e.g. sales@lifetechsg.com
+//   META_CAPI_ACCESS_TOKEN - Meta Conversions API token. NEVER commit this.
+//                            Without it, the Meta reporting is simply skipped.
+//   META_PIXEL_ID    - Meta dataset/pixel id (defaults to the LTSG dataset)
+//   META_TEST_EVENT_CODE   - set temporarily to see events in Events Manager's
+//                            "Test events" tab; remove for production traffic.
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const HOUSING = {
   '3-Room': {
@@ -43,6 +52,82 @@ const WA_LINK = 'https://wa.me/6588547512?text=' +
 
 function firstName(name) {
   return String(name).trim().split(/\s+/)[0];
+}
+
+// ---- Meta Conversions API -------------------------------------------------
+// Meta requires contact details to be normalised (trimmed, lowercased, no
+// punctuation) and then SHA-256 hashed. The fbp/fbc browser ids are the
+// exception: those are sent as-is.
+
+const META_API_VERSION = 'v21.0';
+const DEFAULT_PIXEL_ID = '1599859951666915'; // LTSG dataset
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(String(value)).digest('hex');
+}
+
+function hashed(value) {
+  const v = String(value || '').trim().toLowerCase();
+  return v ? [sha256(v)] : undefined;
+}
+
+// Meta wants phone numbers as digits only, including the country code.
+function hashedPhone(value) {
+  let digits = String(value || '').replace(/\D/g, '');
+  if (digits.length === 8) digits = '65' + digits; // bare SG mobile
+  return digits ? [sha256(digits)] : undefined;
+}
+
+async function reportLeadToMeta({ name, email, whatsapp, housing, meta, clientIp, userAgent }) {
+  const token = process.env.META_CAPI_ACCESS_TOKEN;
+  if (!token) return { skipped: 'no token' };
+
+  const pixelId = process.env.META_PIXEL_ID || DEFAULT_PIXEL_ID;
+  const parts = String(name).trim().split(/\s+/);
+
+  const userData = {
+    em: hashed(email),
+    ph: hashedPhone(whatsapp),
+    fn: hashed(parts[0]),
+    ln: parts.length > 1 ? hashed(parts.slice(1).join(' ')) : undefined,
+    country: hashed('sg'),
+  };
+  // Browser identifiers and request metadata sharpen attribution. Never hashed.
+  if (meta.fbp) userData.fbp = meta.fbp;
+  if (meta.fbc) userData.fbc = meta.fbc;
+  if (clientIp) userData.client_ip_address = clientIp;
+  if (userAgent) userData.client_user_agent = userAgent;
+
+  const body = {
+    data: [{
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: meta.event_id, // dedupes against the browser Pixel event
+      event_source_url: meta.event_source_url,
+      action_source: 'website',
+      user_data: userData,
+      custom_data: {
+        content_name: 'No-Reno Smart Home Guide',
+        content_category: housing,
+      },
+    }],
+  };
+  if (process.env.META_TEST_EVENT_CODE) {
+    body.test_event_code = process.env.META_TEST_EVENT_CODE;
+  }
+
+  const url = `https://graph.facebook.com/${META_API_VERSION}/${pixelId}/events` +
+    `?access_token=${encodeURIComponent(token)}`;
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!resp.ok) {
+    // Log without the token so it never lands in the logs.
+    throw new Error(`Meta CAPI ${resp.status}: ${await resp.text().catch(() => '')}`);
+  }
+  return resp.json().catch(() => ({}));
 }
 
 function packagesBlock(h) {
@@ -114,7 +199,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const { name, email, whatsapp, housing } = req.body || {};
+  const { name, email, whatsapp, housing, meta } = req.body || {};
   const phoneOk = /^(?:\+?65)?[89]\d{7}$/.test(String(whatsapp || '').replace(/[\s-]/g, ''));
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email || '').trim());
   const h = HOUSING[housing];
@@ -144,6 +229,17 @@ module.exports = async (req, res) => {
     body: JSON.stringify(payload),
   });
 
+  // Report the lead to Meta alongside the email. Awaited below (before any
+  // response) so the serverless runtime can't freeze mid-request, but its
+  // failures are swallowed: ad reporting must never break the guide delivery.
+  const metaReport = reportLeadToMeta({
+    name, email, whatsapp,
+    housing: h.label,
+    meta: meta || {},
+    clientIp: String(req.headers['x-forwarded-for'] || '').split(',')[0].trim(),
+    userAgent: req.headers['user-agent'],
+  }).catch((err) => { console.error('Meta CAPI error:', err.message); });
+
   const mail = await send({
     from,
     to: [String(email).trim()],
@@ -152,6 +248,8 @@ module.exports = async (req, res) => {
     html: emailHtml(name, h),
     attachments,
   });
+
+  await metaReport;
 
   if (!mail.ok) {
     const detail = await mail.text().catch(() => '');

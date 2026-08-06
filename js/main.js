@@ -127,13 +127,32 @@ if (leadForm) {
 
     const email = fields.email.el.value.trim();
     const housing = fields.housing.el.value;
+
+    // One id shared by the browser event below and the server-side Conversions
+    // API event, so Meta counts this lead once rather than twice.
+    const eventId = window.metaEventId ? window.metaEventId() : 'e' + Date.now();
+    const ids = window.metaIdentifiers ? window.metaIdentifiers() : {};
+
     const payload = {
       name: fields.name.el.value.trim(),
       email: email,
       whatsapp: fields.phone.el.value.replace(/[\s-]/g, ''),
       housing: housing,
-      source: 'no-reno-guide-banner'
+      source: 'no-reno-guide-banner',
+      meta: {
+        event_id: eventId,
+        fbp: ids.fbp || '',
+        fbc: ids.fbc || '',
+        event_source_url: window.location.href
+      }
     };
+
+    if (window.fbq) {
+      fbq('track', 'Lead', {
+        content_name: 'No-Reno Smart Home Guide',
+        content_category: housing
+      }, { eventID: eventId });
+    }
 
     fetch(LEAD_API, {
       method: 'POST',
